@@ -1,4 +1,4 @@
-﻿
+
 // PiPiPi.cpp: 애플리케이션에 대한 클래스 동작을 정의합니다.
 //
 
@@ -38,6 +38,26 @@ CPiPiPiApp theApp;
 
 // CPiPiPiApp 초기화
 
+/**
+ * @brief Initializes the application instance: sets up common controls, MFC visual manager,
+ * creates and later destroys a shell manager, sets registry key for settings, and runs the
+ * main modal dialog.
+ * @example
+ * BOOL result;
+ * CPiPiPiApp theApp;
+ * result = theApp.InitInstance();
+ * // Expected: result == FALSE (the application exits after the modal dialog is closed)
+ * 
+ * @return BOOL - Returns FALSE to indicate the application should not start a message pump
+ *                 (the app ends after the dialog is closed). Side effects include:
+ *                 - Calling InitCommonControlsEx for Windows common controls initialization.
+ *                 - Enabling control container support.
+ *                 - Allocating a CShellManager while the dialog is active.
+ *                 - Setting CMFCVisualManagerWindows as the default visual manager.
+ *                 - Creating and running CPiPiPiDlg modally and handling IDOK/IDCANCEL/-1 responses.
+ *                 - Cleaning up the shell manager and optionally calling ControlBarCleanUp
+ *                   in static builds without MFC controls in dialogs.
+ */
 BOOL CPiPiPiApp::InitInstance()
 {
 	// Windows XP에서는 InitCommonControlsEx()를 필요로 합니다.
