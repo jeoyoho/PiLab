@@ -8,6 +8,11 @@
 #include "PiPiPiDlg.h"
 #include "afxdialogex.h"
 
+
+#include <iostream>
+#include <cmath>
+#include <iomanip> // For std::setprecision
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -59,12 +64,16 @@ CPiPiPiDlg::CPiPiPiDlg(CWnd* pParent /*=nullptr*/)
 void CPiPiPiDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_LIST_TRACE, m_TraceListBox);
 }
 
 BEGIN_MESSAGE_MAP(CPiPiPiDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_BN_CLICKED(IDC_BT_STL_METHOD, &CPiPiPiDlg::OnBnClickedBtStlMethod)
+	ON_BN_CLICKED(IDC_BT_LEIBNIZ, &CPiPiPiDlg::OnBnClickedBtLeibniz)
+	ON_BN_CLICKED(IDC_BT_MPFR, &CPiPiPiDlg::OnBnClickedBtMpfr)
 END_MESSAGE_MAP()
 
 
@@ -153,3 +162,49 @@ HCURSOR CPiPiPiDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
+
+void CPiPiPiDlg::OnBnClickedBtStlMethod()
+{
+    double pi_acos = 2 * std::acos(0.0); // acos(0) returns pi/2
+    double pi_asin = 2 * std::asin(1.0); // asin(1) returns pi/2
+
+
+	CString strTrace;
+
+	strTrace.Format(L"Pi using acos(0.0): %.*f", 20, pi_asin);
+	m_TraceListBox.AddString(strTrace);
+
+	strTrace.Format(L"Pi using asin(1.0): %.*f", 20, pi_asin);
+	m_TraceListBox.AddString(strTrace);
+}
+
+void CPiPiPiDlg::OnBnClickedBtLeibniz()
+{
+	double pi_approx = 0.0;
+	long long num_terms = 1000000; // Number of terms for approximation
+
+	for (long long i = 0; i < num_terms; ++i)
+	{
+		double term = 1.0 / (2.0 * i + 1.0);
+
+		if (i % 2 == 0)	// Add for even terms
+		{
+			pi_approx += term;
+		}
+		else			// Subtract for odd terms
+		{
+			pi_approx -= term;
+		}
+	}
+
+	pi_approx *= 4.0;
+
+	CString strTrace;
+	strTrace.Format(L"Pi using Leibniz formula: %.*f", 20, pi_approx);
+	m_TraceListBox.AddString(strTrace);
+}
+using Sdcb.Arithmetic.Gmp;
+void CPiPiPiDlg::OnBnClickedBtMpfr()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+}

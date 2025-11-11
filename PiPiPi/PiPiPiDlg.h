@@ -31,4 +31,9 @@ protected:
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnBnClickedBtStlMethod();
+	CListBox m_TraceListBox;
+	afx_msg void OnBnClickedBtLeibniz();
+	afx_msg void OnBnClickedBtMpfr();
 };
