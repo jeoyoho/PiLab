@@ -33,7 +33,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnBnClickedBtStlMethod();
-	CListBox m_TraceListBox;
 	afx_msg void OnBnClickedBtLeibniz();
 	afx_msg void OnBnClickedBtMpfr();
+	CListBox m_TraceListBox;
 };

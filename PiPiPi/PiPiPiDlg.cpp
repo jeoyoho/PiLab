@@ -64,7 +64,8 @@ CPiPiPiDlg::CPiPiPiDlg(CWnd* pParent /*=nullptr*/)
 void CPiPiPiDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
-IDC_LIST_TRACE
+
+	DDX_Control(pDX, IDC_LIST_TRACE, m_TraceListBox);
 }
 
 BEGIN_MESSAGE_MAP(CPiPiPiDlg, CDialogEx)
@@ -200,7 +201,7 @@ void CPiPiPiDlg::OnBnClickedBtStlMethod()
 
 	CString strTrace;
 
-	strTrace.Format(L"Pi using acos(0.0): %.*f", 20, pi_asin);
+	strTrace.Format(L"Pi using acos(0.0): %.*f", 20, pi_acos);
 	m_TraceListBox.AddString(strTrace);
 
 	strTrace.Format(L"Pi using asin(1.0): %.*f", 20, pi_asin);
@@ -232,7 +233,7 @@ void CPiPiPiDlg::OnBnClickedBtLeibniz()
 	strTrace.Format(L"Pi using Leibniz formula: %.*f", 20, pi_approx);
 	m_TraceListBox.AddString(strTrace);
 }
-using Sdcb.Arithmetic.Gmp;
+
 void CPiPiPiDlg::OnBnClickedBtMpfr()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
